@@ -1,7 +1,42 @@
-# CSCI946-Big-data-Analytics---Assignment-3-
-The rapid growth of digital images and videos has made visual data analysis a core aspect of Big Data Analytics, requiring advanced algorithms for efficient processing. Deep learning models play a crucial role in extracting complex patterns from images, driving applications such as surveillance, autonomous vehicles, healthcare diagnostics, sentiment analysis, and security systems. This integration demands specialised expertise, robust computational resources, and hardware like GPUs or TPUs to handle large datasets effectively.
-Pre-trained models have become increasingly popular as feature extractors, enabling faster development of solutions by minimising retraining efforts. ImageNet, introduced in 2009, has been a benchmark for image recognition, propelling advancements with competitive challenges. However, reliance on the original ImageNet validation set (referred to as Test Set 1) has raised concerns about overfitting, as models risk becoming too specialised to its 50,000 images. To address this, ImageNetV2 introduced new validation sets like MatchedFrequency, referred to as Test Set 2, offering a similar class distribution to evaluate generalisation more effectively.
-While differences in performance across these test sets persist, Recht et al. (2019) found that high-performing models on Test Set 1 also perform well on Test Set 2, suggesting that image difficulty and dataset composition, rather than overfitting, drive performance variability. These findings highlight the need for more diverse benchmarks to accurately measure model generalisation across datasets.
+# Evaluation of Generalisation Accuracy on Deep Features from ImageNet
+This repository contains the implementation and results of our project for CSCI946 Big Data Analytics (University of Wollongong). The project investigates the generalisation performance of models trained on the ImageNet dataset across its original validation set (Test Set 1) and a new validation set (Test Set 2, ImageNetV2).
 
-Regarding the background of our project, the goal is to prove whether models trained on the ImageNet dataset (Test Set 1) generalise effectively to the ImageNetV2 dataset (Test Set 2). We hypothesise that performance discrepancies arise due to subtle differences in the datasets, such as image difficulty, rather than overfitting. This aligns with the findings of Recht et al. (2019), who suggest that while accuracy drops are observed between original and new datasets, they are driven more by dataset complexity than model adaptivity (Recht et al., 2019). 
+## Project Overview
+Deep learning models often exhibit performance variability across datasets. This project:
+- Transfer Learning: Utilised pre-trained models on ImageNet to extract deep features, significantly reducing computational complexity while retaining meaningful representations for downstream classification tasks.
+- Examines the hypothesis that dataset complexity, rather than overfitting, drives performance drops between ImageNet and ImageNetV2.
+- Evaluates the performance of two model types: CatBoost Classifier and Feed-Forward Neural Networks (FFNs).
+- Provides recommendations to improve model generalisation.
 
+## Key Features
+**Transfer Learning Approach**:
+Deep features extracted from pre-trained ImageNet models were used as inputs, avoiding the need to train models from scratch.
+This approach enabled faster experimentation and efficient utilisation of resources while leveraging the robustness of pre-trained representations.
+Data Preparation: Dimensionality reduction (PCA) and stratified sampling for computational efficiency.
+**Models Used**:
+CatBoost: Gradient boosting with optimised parameters.
+FFNs: Multiple architectures tested with hyperparameter tuning using Optuna and Random Search.
+**Advanced Analysis**: Investigated performance gaps for specific labels and their causes using visual inspection and clustering.
+Tools and Libraries
+Python: Primary programming language.
+TensorFlow/Keras: FFN implementation.
+CatBoost Library: For gradient boosting.
+Optuna and Random Search: For hyperparameter optimisation.
+Google Colab Pro: Computational environment.
+Results
+**Model Generalisation**:
+Both models showed strong performance on Test Set 1 but struggled with Test Set 2.
+FFN models achieved up to 92% accuracy on validation data, with custom architectures offering robust generalisation.
+Findings:
+Test Set 2 images are more complex and noisy, aligning with the hypothesis of dataset variability influencing performance.
+Domain shift and dataset diversity significantly impact model accuracy.
+**Recommendations**
+Enhance training data diversity with more complex and varied images.
+Incorporate data augmentation techniques to simulate real-world scenarios.
+Experiment with deeper FFN architectures and domain adaptation techniques.
+
+**Lessons Learned**
+The importance of leveraging transfer learning for computational efficiency and model robustness.
+The necessity of diverse datasets for better model generalisation.
+Efficient resource management when handling large datasets.
+The role of exploratory data analysis and clustering in understanding performance gaps.
